@@ -13,7 +13,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         
-        <link rel=stylesheet href ="\css\bootstrp.css">
+        <link rel="stylesheet" href ="{{ asset('css/app.css') }}">
         <link rel=stylesheet href ="\css\bootstrp.min.css">
         <script src="\js\jquery-1.9.min.js"></script>
         <script src="\js\bootstrap.min.js"></script>
@@ -65,5 +65,6 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
     </body>
 </html>

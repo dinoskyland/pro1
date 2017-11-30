@@ -2,70 +2,172 @@
 
 @section('content')
     <div class="container">
+       <div class="row">
+          <h1>Basic information process</h1>
+       </div> 
         <div class="row">
-            <h1>Time Units</h1>
-            <form action="{{route('time_unit')}}" method="post">
-                @if ($errors->any())
-                    <div class="alert alert-danger" role="alert">
-                        Please fix the following errors
-                    </div>
-                @endif
-
-                {!! csrf_field() !!}
-                <div class="form-group{{ $errors->has('kind') ? ' has-error' : '' }}">
-                    <label for="kind">Time unit</label>
-                    <input type="text" class="form-control" id="kind" name="kind" placeholder="Time unit" value="{{ old('kind') }}">
-                    @if($errors->has('kind'))
-                        <span class="help-block">{{ $errors->first('kind') }}</span>
-                    @endif
-                </div>
-                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="{{ old('description') }}">
-                    @if($errors->has('description'))
-                        <span class="help-block">{{ $errors->first('description') }}</span>
-                    @endif
-                </div>
-                <button type="submit" class="btn btn-default">Save Time unit</button>
-            </form>
-        </div>
-
-        <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">You are in the payment feature view</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+           <div class="col-sm-6">
+                <h3>Time Unit </h3>            
+                <form action="{{route('time_unit')}}" method="post">
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            Please fix the following errors
                         </div>
                     @endif
 
+                    {!! csrf_field() !!}
+                    <div class="form-group{{ $errors->has('kind') ? ' has-error' : '' }}">
+                        <label for="kind">Time unit</label>
+                        <input type="text" class="form-control" id="kind" name="kind" placeholder="Time unit" value="{{ old('kind') }}">
+                        @if($errors->has('kind'))
+                            <span class="help-block">{{ $errors->first('kind') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="{{ old('description') }}">
+                        @if($errors->has('description'))
+                            <span class="help-block">{{ $errors->first('description') }}</span>
+                        @endif
+                    </div>
+                    <button type="submit" class="btn btn-default">Save Time unit</button>
+                </form>
+            </div>
 
-                    @foreach($pays as $pay)
+            <div class="col-sm-6">
+                <h3>Payment Type </h3>            
+                <form action="{{route('time_unit')}}" method="post">
+                    @if ($errors->any())
+                        <div class="alert alert-danger" role="alert">
+                            Please fix the following errors
+                        </div>
+                    @endif
 
-                 <ul>
-                         <p>  {{$pay->payment_id}} </p>
-                         <p> {{$pay->p_kind}} </p>
-                  </ul>
+                    {!! csrf_field() !!}
+                    <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                        <label for="type">Payment Type</label>
+                        <input type="text" class="form-control" id="type" name="type" placeholder="Payment type" value="{{ old('type') }}">
+                        @if($errors->has('type'))
+                            <span class="help-block">{{ $errors->first('type') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group{{ $errors->has('pay_description') ? ' has-error' : '' }}">
+                        <label for="pay_description">Description</label>
+                        <input type="text" class="form-control" id="pay_description" name="pay_description" placeholder="Description" value="{{ old('pay_description') }}">
+                        @if($errors->has('pay_description'))
+                            <span class="help-block">{{ $errors->first('pay_description') }}</span>
+                        @endif
+                    </div>
+                    <button type="submit" class="btn btn-default">Save Payment Type</button>
+                </form>
+            </div>
 
-                  @endforeach                     
 
-                <div>
-                  @foreach($timeunits as $timeunit)
 
-                 <ul>
-                         <p>  {{$timeunit->time_unit_id}} </p>
-                         <p> {{$timeunit->kind}} </p>
-                  </ul>
-                </div> 
-                  @endforeach 
-                   
-                  
+        </div>
+
+        <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                <div class="row">
+                    <div class="col-sm-8">
+                    <h3 class="box-title-center"><h2>Time Units list</h2></h3> 
+                    </div>
                 </div>
             </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Time unit ID</th>
+                    <th>Time unit Type</th>
+                    <th>Creation Date</th>
+            </tr>
+                </thead>
+                <tbody>
+                  <div>
+                      @foreach($timeunits as $timeunit)  
+                  <tr>       
+                        <td> {{ $timeunit->time_unit_id }} </td>
+                        <td> {{ $timeunit->kind }} </td>
+                        <td> {{ $timeunit->created_at }} </td>
+                  </tr>           
+                      @endforeach  
+            </div> 
+                          
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>Time unit ID</th>
+                    <th>Time unit Type</th>
+                    <th>Creation Date</th>
+            </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
         </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+        <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h3 class="box-title-center"><h2>Payments Type list</h2></h3> 
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Payment ID</th>
+                    <th>Payment Type</th>
+                    <th>Creation Date</th>
+            </tr>
+                </thead>
+                <tbody>
+                  <div>
+                      @foreach($pays as $pay)  
+                  <tr>       
+                        <td> {{ $pay->payment_id }} </td>
+                        <td> {{ $pay->p_kind }} </td>
+                        <td> {{ $pay->created_at }} </td>
+                  </tr>           
+                      @endforeach  
+            </div> 
+                          
+                </tbody>
+                <tfoot>
+                <tr>
+                        <th>Payment ID</th>
+                        <th>Payment Type</th>
+                        <th>Creation Date</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+
     </div>
-    </div>
+    
 @endsection

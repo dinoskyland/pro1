@@ -4,6 +4,11 @@
     <div class="container">
         <div class="row">
             <h1>Product Features</h1>
+        </div>
+        <div class="row">  
+          <div class="col-sm-6" >
+            <h3>Product Input</h3>
+
             <form action="{{route('product')}}" method="post">
                 @if ($errors->any())
                     <div class="alert alert-danger" role="alert">
@@ -13,28 +18,69 @@
 
                 {!! csrf_field() !!}
                 <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{ old('title') }}">
-                    @if($errors->has('title'))
-                        <span class="help-block">{{ $errors->first('title') }}</span>
+                    <label for="pro_name">Product Name</label>
+                    <input type="text" class="form-control" id="pro_name" name="pro_name" placeholder="Product name" value="{{ old('pro_name') }}">
+                    @if($errors->has('pro_name'))
+                        <span class="help-block">{{ $errors->first('pro_name') }}</span>
                     @endif
                 </div>
-                <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
-                    <label for="url">Url</label>
-                    <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{ old('url') }}">
-                    @if($errors->has('url'))
-                        <span class="help-block">{{ $errors->first('url') }}</span>
+                <div class="form-group{{ $errors->has('vesrion') ? ' has-error' : '' }}">
+                    <label for="version">Version</label>
+                    <input type="text" class="form-control" id="version" name="version" placeholder="Version" value="{{ old('version') }}">
+                    @if($errors->has('version'))
+                        <span class="help-block">{{ $errors->first('version') }}</span>
+                    @endif
+                </div>
+                <div class="form-group{{ $errors->has('pro_description') ? ' has-error' : '' }}">
+                    <label for="pro_description">Description</label>
+                    <textarea class="form-control" id="pro_description" name="pro_description" placeholder="Description">{{ old('pro_description') }}</textarea>
+                    @if($errors->has('pro_description'))
+                        <span class="help-block">{{ $errors->first('pro_description') }}</span>
+                    @endif
+                </div>
+                <button type="submit" class="btn btn-default">Save Product information</button>
+            </form>
+
+          </div>
+
+          <div class="col-sm-6" >
+            <h3>Package Input</h3>
+
+            <form action="{{route('product')}}" method="post">
+                @if ($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        Please fix the following errors
+                    </div>
+                @endif
+
+                {!! csrf_field() !!}
+                <div class="form-group{{ $errors->has('pk_name') ? ' has-error' : '' }}">
+                    <label for="pk_name">Package Type</label>
+                    <input type="text" class="form-control" id="pk_name" name="pk_name" placeholder="Package name" value="{{ old('pk_name') }}">
+                    @if($errors->has('pk_name'))
+                        <span class="help-block">{{ $errors->first('pk_name') }}</span>
+                    @endif
+                </div>
+                <div class="form-group{{ $errors->has('pk_version') ? ' has-error' : '' }}">
+                    <label for="pk_version">Version</label>
+                    <input type="text" class="form-control" id="pk_version" name="pk_version" placeholder="version" value="{{ old('pk_version') }}">
+                    @if($errors->has('pk_version'))
+                        <span class="help-block">{{ $errors->first('pk_version') }}</span>
                     @endif
                 </div>
                 <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" placeholder="description">{{ old('description') }}</textarea>
+                    <textarea class="form-control" id="description" name="description" placeholder="Description">{{ old('description') }}</textarea>
                     @if($errors->has('description'))
                         <span class="help-block">{{ $errors->first('description') }}</span>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Save Package information</button>
             </form>
+            
+          </div>
+
+
         </div>
 
         <section>
@@ -115,7 +161,7 @@
                     <th>Version</th>
                     <th>Description</th>
                     <th>Creation Date</th>
-            </tr>
+                </tr>
                 </thead>
                 <tbody>
                   <div>
