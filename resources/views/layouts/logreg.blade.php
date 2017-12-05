@@ -103,51 +103,8 @@
                     </div>
                         
                                 <ul class="nav navbar-nav">
-                                <li class="active"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li><a href="{{route('sub_sum')}}">Subscription Summary</a></li>
-                                    <li><a href="{{route('euser')}}">Users</a></li>
-                                    
-
-                                    <li class="dropdown">
-                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Product Features process
-                                        <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                                <li><a href="{{route('product')}}">Product </a></li>
-                                                <li><a href="{{route('package')}}">Package</a></li>                                       
-                                                <li><a href="{{route('payment_type')}}">Rate Plan</a></li>                                       
-
-                                        </ul>    
-                                    </li>                                    
-
-
-                                    <li class="dropdown">
-                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Basic information process
-                                        <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                                <li><a href="{{route('time_unit')}}">Time Unit</a></li>
-                                                <li><a href="{{route('payment_type')}}">Payment Type</a></li>                                       
-                                        </ul>    
-                                    </li>                                    
-                                </ul>
-                        
-                                <ul class="nav navbar-nav navbar-right">                     
-                                    @if (Auth::guest())
-                                        <li><a class="navbar-item " href="{{ route('login') }}">Login</a></li>
-                                        <li><a class="navbar-item " href="{{ route('register') }}">Register</a></li>
-                                    @else                                       
-                                        <li><a class="navbar-link" href="#">{{ Auth::user()->name }}</a></li>                                           
-                                        <li><a class="navbar-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                                    Logout
-                                            </a></li>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                                    style="display: none;">
-                                                    {{ csrf_field() }}
-                                        </form>                                                                                  
-                                    @endif
-                                    
-                                </ul>
+                                <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                                </ul>                       
 
                 </div>
             </nav>

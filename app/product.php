@@ -11,6 +11,4 @@ class product extends Model
         'version',
         'description',
     ];
-    public $timestamps = false;
-    protected $table = 'producsts';    
 }

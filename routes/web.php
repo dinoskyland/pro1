@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Auth::routes();
+Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -32,8 +32,18 @@ Route::post('/euser','userController@euser_post')->name('euser');
 Route::get('/product','userController@product')->name('product');
 Route::post('/product','userController@product_post')->name('product');
 
+
+Route::get('/package','userController@package')->name('package');
+Route::post('/package','userController@package_post')->name('package');
+
+Route::get('/rate_plan','userController@rate_plan')->name('rate_plan');
+Route::post('/rate_plan','userController@rate_plan_post')->name('rate_plan');
+
 Route::get('/time_unit','userController@time_unit')->name('time_unit');
 Route::post('/time_unit','userController@time_unit_post')->name('time_unit');
+
+Route::get('/payment_type','userController@payment')->name('payment_type');
+Route::post('/payment_type','userController@payment_post')->name('payment_type');
 
 
 Route::get('/sub_sum','userController@sub_sum')->name('sub_sum');

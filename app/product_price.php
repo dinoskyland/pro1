@@ -9,8 +9,6 @@ class product_price extends Model
     protected $fillable = [
         'product_id',
         'price',
-        'description',
+        'description'
     ];
-    public $timestamps = false;
-    protected $table = 'product_prices';    
 }

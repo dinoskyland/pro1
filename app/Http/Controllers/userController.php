@@ -57,13 +57,13 @@ class userController extends Controller
     public function product()
     {
         $products = DB::select('select * from products'); 
-        $packages = DB::select('select * from packages');
-        
-        return view('product',['products'=>$products,'packages'=>$packages]);
+                
+        return view('product',['products'=>$products]);
     }
 
     public function product_post(Request $request)
     {
+      if ($request['product_name'] != "") {
         $data = $request->validate([
             'product_name' => 'required|max:30',
             'version' => 'max:20',
@@ -71,12 +71,89 @@ class userController extends Controller
           ]);
       
       
-          (new App\product($data))->save();
-          // $link = tap(new App\Link($data))->save();
+          DB::table('products')->insert(array(  'product_name'=>$request['product_name'], 
+                                                'version'=>$request['version'],
+                                                'description'=>$request['description'],
+                                                'created_at'=>\Carbon\Carbon::now(),
+                                                'updated_at'=>\Carbon\Carbon::now() ));
       
-          return redirect('/');
+          return redirect('/product');
+
+        } 
+        
+        if ($request['product_id'] != "") {
+
+            $data = $request->validate([
+                'product_id' => 'required',
+                'price' => 'max:20',
+                'description' => 'max:30',
+                'change_date'=> 'required'
+              ]);
+          
+          
+              DB::table('product_prices')->insert(array('product_id'=>$request['product_id'], 
+                                                        'price'=>$request['price'],
+                                                        'description'=>$request['pdescription'],
+                                                        'change_date'=>$request['change_date'],
+                                                        'created_at'=>\Carbon\Carbon::now(),
+                                                        'updated_at'=>\Carbon\Carbon::now() ));
+      
+              return redirect('/product');
+              //return 'Finish price result';
+            
+        } else
+        {
+            return redirect('/product');            
+            //return 'Null Result';
+        }
     }
    
+    public function product_price_post(Request $request)
+    {
+        $data = $request->validate([
+            'product_id' => 'required',
+            'price' => 'max:20',
+            'description' => 'max:30',
+            'change_date'=> 'required'
+          ]);
+      
+      
+          DB::table('product_prices')->insert(array(  'product_id'=>$request['product_name'], 
+                                                'price'=>$request['price'],
+                                                'description'=>$request['description'],
+                                                'change_date'=>$request['change_date'],
+                                                'created_at'=>\Carbon\Carbon::now(),
+                                                'updated_at'=>\Carbon\Carbon::now() ));
+  
+          return redirect('/product');
+    }
+
+    public function package(Request $request)
+    {
+        $packages = DB::select('select * from packages'); 
+        
+        return view('package',['packages'=>$packages]);
+    }
+
+
+    public function package_post(Request $request)
+    {
+        $data = $request->validate([
+            'package_name' => 'required|max:30',
+            'version' => 'max:20',
+            'description' => 'max:30',
+          ]);
+      
+      
+          DB::table('packages')->insert(array('kind'=>$request['kind'], 
+          'description'=>$request['description'],
+          'created_at'=>\Carbon\Carbon::now(),
+          'updated_at'=>\Carbon\Carbon::now() ));
+
+
+        return redirect('/package');
+    }
+
 
     public function time_unit()
     {
@@ -89,16 +166,43 @@ class userController extends Controller
     public function time_unit_post(Request $request)
     {
         $data = $request->validate([
-            'kind' => 'required|max:30',
-            'description' => 'required|max:30',
+            'kind' => 'required',
+            'description' => 'required',
           ]);
-      
-      
-          (new App\time_unit($data))->save();
+
+        DB::table('time_units')->insert(array('kind'=>$request['kind'], 
+                                              'description'=>$request['description'],
+                                              'created_at'=>\Carbon\Carbon::now(),
+                                              'updated_at'=>\Carbon\Carbon::now() ));
+             
           
-      
-          return redirect('/');
+          return redirect('/time_unit');
     }
 
+
+    public function payment()
+    {
+
+        $pays =      DB::select('select * from payment_types');     
+        return view('payment_type',['pays'=>$pays]);
+    }
+
+
+    public function payment_post(Request $request)
+    {
+        $data = $request->validate([
+            'p_kind' => 'required',
+            'description' => 'required',
+          ]);
+      
+            
+          DB::table('payment_types')->insert(array('p_kind'=>$request['p_kind'], 
+          'description'=>$request['description'],
+          'created_at'=>\Carbon\Carbon::now(),
+          'updated_at'=>\Carbon\Carbon::now() ));
+
+      
+          return redirect('/payment_type');
+    }
 
 }
