@@ -47,7 +47,9 @@ Route::post('/payment_type','userController@payment_post')->name('payment_type')
 
 
 Route::get('/sub_sum','userController@sub_sum')->name('sub_sum');
-Route::post('/sub_sum','userController@sub_sum_post')->name('sub_sum');Auth::routes();
+Route::post('/sub_sum','userController@sub_sum_post')->name('sub_sum');
+
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 

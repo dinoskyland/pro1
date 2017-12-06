@@ -104,7 +104,7 @@
                         
                                 <ul class="nav navbar-nav">
                                 <li class="active"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li><a href="{{route('sub_sum')}}">Subscription Summary</a></li>
+                                    <li><a href="{{route('sub_sum')}}">Subscription prcess</a></li>
                                     <li><a href="{{route('euser')}}">Users</a></li>
                                     
 
@@ -114,7 +114,7 @@
                                         <ul class="dropdown-menu">
                                                 <li><a href="{{route('product')}}">Product </a></li>
                                                 <li><a href="{{route('package')}}">Package</a></li>                                       
-                                                <li><a href="{{route('payment_type')}}">Rate Plan</a></li>                                       
+                                                <li><a href="{{route('rate_plan')}}">Rate Plan</a></li>                                       
 
                                         </ul>    
                                     </li>                                    

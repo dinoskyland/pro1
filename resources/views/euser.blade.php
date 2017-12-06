@@ -11,7 +11,7 @@
                      <h3 class="box-title-center"><h2>Users list</h2></h3> 
                     </div>
                     <div class="col-sm-4">
-                     <button id="addsub"type="button" class="btn btn-success">Add User</button>
+                     <a href="{{ url('/register') }}" id="addsub" type="button" class="btn btn-success">Add User<a>
                     </div>
                 </div>
             </div>

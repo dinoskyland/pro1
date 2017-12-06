@@ -11,7 +11,7 @@ class subscription extends Model
         'user_id',
         'activated_at',
         'billing_date',
-        'suspend_date',
+        'suspended_date',
         'resuming_date',
         'temp_date',
         'current_balance',
@@ -20,7 +20,5 @@ class subscription extends Model
         'status',
         'description',        
     ];
-    
-    public $timestamps = false;
-    protected $table = 'subscriptions';
+
 }

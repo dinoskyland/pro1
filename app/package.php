@@ -11,6 +11,4 @@ class package extends Model
         'version',
         'description',
     ];
-    public $timestamps = false;
-    protected $table = 'packages';    
 }

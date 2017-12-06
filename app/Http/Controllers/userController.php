@@ -11,7 +11,7 @@ class userController extends Controller
     public function euser()
     {
         //$eusers = euser::all();
-        $eusers = DB::select('select * from eusers');
+        $eusers = DB::select('select * from users');
         return view('euser',['eusers'=>$eusers]);
         //return view();
     }    
@@ -38,20 +38,51 @@ class userController extends Controller
         return view('userList',['subs'=>$subs]);
         //return 'User List'.$usersview('userList',['users'=>$users]);
         */
-        $subs = DB::select('select * from subscriptions');        
-        return view('sub_sum',['subs'=>$subs]);
+        $subsc = DB::select('select * from subscriptions');      
+        $subs_logs = DB::select('select * from subscription_logs');      
+        $times = DB::select('select * from time_units');      
+        $pays = DB::select('select * from payment_types');      
+        $eusers = DB::select('select * from users');     
+        $rates = DB::select('select * from rate_plans');             
+        $packages = DB::select('select * from packages');      
+        $products = DB::select('select * from products');      
+        return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,
+                               'eusers'=>$eusers,'rates'=>$rates,'packages'=>$packages,'products'=>$products]);
     }
 
-    public function sub_sum_post()
+    public function sub_sum_post(Request $request)
     {
         /*
-        $subs = subscription::all(); //DB::select('select email from eusers;');
-        
-        return view('userList',['subs'=>$subs]);
-        //return 'User List'.$usersview('userList',['users'=>$users]);
-        */
-        //return view('sub_sum');
-        return redirect('/');        
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+        */  
+          
+            DB::table('subscriptions')->insert(array(  'rate_plan_id'=>$request['irate_plan'], 
+                                                    'user_id'=>$request['ieuser_id'],
+                                                    'activated_at'=>$request['iact_date'],
+                                                    'payment_id'=>$request['ipay_type'],
+                                                    'time_unit_id'=>$request['ipay_time'],
+                                                    'status'=>$request['istatus'],
+                                                    'description'=>$request['idescription'],
+                                                    'created_at'=>\Carbon\Carbon::now(),
+                                                    'updated_at'=>\Carbon\Carbon::now() ));
+            /*
+            $subId = DB::select('select subscription_id from subscriptions where user_id = :id',['id'=>$request['ieuser_id']]);                                                    
+            DB::table('subscription_logs')->insert(array('subscription_id'=>$subId,  
+                                                    'rate_plan_id'=>$request['irate_plan'], 
+                                                    'user_id'=>$request['iuser_id'],
+                                                    'activated_at'=>$request['iact_date'],
+                                                    'payment_id'=>$request['ipay_type'],
+                                                    'time_unit_id'=>$request['ipay_time'],
+                                                    'status'=>$request['istatus'],
+                                                    'description'=>$request['idescription'],
+                                                    'created_at'=>\Carbon\Carbon::now(),
+                                                    'updated_at'=>\Carbon\Carbon::now() ));
+            */
+            return view('sub_sum');
     }
 
     public function product()
@@ -138,22 +169,127 @@ class userController extends Controller
 
     public function package_post(Request $request)
     {
-        $data = $request->validate([
-            'package_name' => 'required|max:30',
-            'version' => 'max:20',
-            'description' => 'max:30',
-          ]);
-      
-      
-          DB::table('packages')->insert(array('kind'=>$request['kind'], 
-          'description'=>$request['description'],
-          'created_at'=>\Carbon\Carbon::now(),
-          'updated_at'=>\Carbon\Carbon::now() ));
+     //variable definition
+        $pk_id = $request['package_id'];
+        $pro_id = $request['product_id'];
+
+        $pkname = $request['package_name'];
+        $pkversion = $request['version'];
+        $pkdescription = $request['description'];
+
+        $price_id = $request['pk_id'];
+        $price = $request['price'];
+        $price_description = $request['pdescription'];
+        $price_change = $request['change_date'];
+
+//        if (($request['package_id'] != "") && ($request['product_id'] != "")) {
+        if (($pk_id != "") && ($pro_id != "")) {
+            $data = $request->validate([
+                'package_id' => 'required',
+                'product_id' => 'required',
+              ]);
+          
+          /*
+              DB::table('package_details')->insert(array('package_id'=>$request['package_id'], 
+                                                        'product_id'=>$request['product_id'],
+                                                        'created_at'=>\Carbon\Carbon::now(),
+                                                        'updated_at'=>\Carbon\Carbon::now() ));
+         */
+        DB::table('package_details')->insert(array('package_id'=>$pk_id, 
+        'product_id'=>$pro_id,
+        'created_at'=>\Carbon\Carbon::now(),
+        'updated_at'=>\Carbon\Carbon::now() ));
+
+         return redirect('/package');
+              //return 'Finish price result';
 
 
-        return redirect('/package');
+        }   
+        
+        if ($price_id != "") {
+            
+                        $data = $request->validate([
+                            'pk_id' => 'required',
+                            'price' => 'max:20',
+                            'pdescription' => 'max:30',
+                            'change_date'=> 'required'
+                          ]);
+                      
+          /*            
+                          DB::table('package_prices')->insert(array('package_id'=>$request['dpackage_id'], 
+                                                                    'price'=>$request['price'],
+                                                                    'description'=>$request['pdescription'],
+                                                                    'change_date'=>$request['change_date'],
+                                                                    'created_at'=>\Carbon\Carbon::now(),
+                                                                    'updated_at'=>\Carbon\Carbon::now() ));
+            */      
+    
+            DB::table('package_prices')->insert(array('package_id'=>$price_id, 
+            'price'=>$price,
+            'description'=>$price_description,
+            'change_date'=>$price_change,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now() ));
+
+            return redirect('/package');
+                          //return 'Finish price result';
+                        
+        } 
+        
+        if ($pkname != "") {        
+                $data = $request->validate([
+                    'package_name' => 'required|max:30',
+                    'version' => 'max:20',
+                    'description' => 'max:30',
+                ]);
+            
+            /*
+                DB::table('packages')->insert(array(    'package_name'=>$request['package_name'], 
+                                                        'version'=>$request['version'],
+                                                        'description'=>$request['description'],
+                                                        'created_at'=>\Carbon\Carbon::now(),
+                                                        'updated_at'=>\Carbon\Carbon::now() ));
+*/
+        DB::table('packages')->insert(array(    'package_name'=>$pkname, 
+        'version'=>$pkversion,
+        'description'=>$pkdescription,
+        'created_at'=>\Carbon\Carbon::now(),
+        'updated_at'=>\Carbon\Carbon::now() ));
+
+                return redirect('/package');
+        } else {
+            return redirect('/package');
+        }  
     }
 
+    public function rate_plan()
+    {
+
+        $rates =      DB::select('select * from rate_plans');     
+        $packages = DB::select('select * from packages');     
+        $products = DB::select('select * from products');     
+        
+        return view('rate_plan',['rates'=>$rates,'packages'=>$packages,'products'=>$products]);
+    }
+
+    public function rate_plan_post(Request $request)
+    {
+        $data = $request->validate([
+            'rate_name' => 'required',
+            'type' => 'required',
+            'selected_id'=>'required',            
+          ]);
+
+        DB::table('rate_plans')->insert(array('rate_plan_name'=>$request['rate_name'], 
+                                              'type'=>$request['type'],
+                                              'selected_id'=>$request['selected_id'],
+                                              'description'=>$request['rdescription'],
+                                              'created_at'=>\Carbon\Carbon::now(),
+                                              'updated_at'=>\Carbon\Carbon::now() ));
+             
+          
+          return redirect('/rate_plan');
+    }
 
     public function time_unit()
     {
@@ -204,5 +340,8 @@ class userController extends Controller
       
           return redirect('/payment_type');
     }
+
+
+
 
 }
