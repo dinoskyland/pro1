@@ -93,6 +93,8 @@
                             
             
                         </div> <!-- row end -->
+    </form> 
+    <!-- form end -->
 
                         <!-- Row start - package list -->
                         <section>
@@ -111,10 +113,12 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th>Subscription ID</th>
+                                        <th>Sub ID</th>
                                         <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>                                       
                                         <th>Rate Plan</th>
-                                        <th>Payment Cycle</th>                                        
+                                        <th>Payment</th>                                        
                                         <th>Activation Date</th>
                                         <th>Billing Date</th>
                                         <th>Status</th>
@@ -124,10 +128,12 @@
                                     <div>
                                         @foreach($subsc as $sub)  
                                     <tr>       
-                                            <td> {{ $sub->subscription_id }} </td>
+                                            <td> {{ $sub->subscription_view_id }} </td>
                                             <td> {{ $sub->user_id }} </td>
-                                            <td> {{ $sub->rate_plan_id }} </td>
-                                            <td> {{ $sub->time_unit_id }} </td>
+                                            <td> {{ $sub->name }} </td>
+                                            <td> {{ $sub->email }} </td>
+                                            <td> {{ $sub->rate_plan_name }} </td>
+                                            <td> {{ $sub->time_type }} </td>
                                             <td> {{ $sub->activated_at }} </td>
                                             <td> {{ $sub->billing_date }} </td>
                                             <td> {{ $sub->status }} </td>
@@ -138,13 +144,17 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Subscription ID</th>
+
+                                        <th>Sub ID</th>
                                         <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>                                       
                                         <th>Rate Plan</th>
-                                        <th>Payment Cycle</th>                                        
+                                        <th>Payment</th>                                        
                                         <th>Activation Date</th>
                                         <th>Billing Date</th>
                                         <th>Status</th>
+
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -165,16 +175,8 @@
                         <div class="row">
                         </div> <!-- temp row -->
 
-                        <!-- test code
-                        <div class="btn-group"> <a class="btn btn-default dropdown-toggle btn-select" href="#" data-toggle="dropdown">Package Name<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                            @foreach($packages as $package)  
-                                                <li><a href="#">{{ $package->package_name }}</a></li>
-                                            @endforeach 
-                                            </ul>
-                        </div>  test code --> 
 
-                        <!-- Row start - package detail input -->
+                        <!-- Row start - subscription input -->
                         <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -192,7 +194,7 @@
                                     <button type="submit" id= "sub_f" class="btn btn-success">Search Subscription logs</button>
                                 </div>
                         </div>
-                        <!-- Row end - package detail input -->
+                        <!-- Row end - subscription input -->
                         <!-- Row start - package detail list -->
                         <section>
                         <div class="row">
@@ -201,7 +203,7 @@
                                 <div class="box-header">
                                     <div class="row">
                                         <div class="col-sm-8">
-                                            <h3 class="box-title-center"><h2>Subscriptions list</h2></h3> 
+                                            <h3 class="box-title-center"><h2>Subscription Logs</h2></h3> 
                                         </div>
                                     </div>
                                 </div>
@@ -210,22 +212,24 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th>Subscription_id</th>
-                                        <th>User_id</th>
-                                        <th>Activated_at</th>
-                                        <th>Billing_date</th>
+                                        <th>Subscription log ID</th>
+                                        <th>Subscription ID</th>
+                                        <th>User ID</th>
+                                        <th>Activation date</th>
+                                        <th>Billing date</th>
                                         <th>Status</th>
                                 </tr>
                                     </thead>
                                     <tbody>
                                     <div>
-                                        @foreach($subsc as $sub)  
+                                        @foreach($subs_logs as $subs_log)  
                                     <tr>       
-                                            <td> {{ $sub->subscription_id }} </td>
-                                            <td> {{ $sub->user_id }} </td>
-                                            <td> {{ $sub->activated_at }} </td>
-                                            <td> {{ $sub->billing_date }} </td>
-                                            <td> {{ $sub->status }} </td>
+                                            <td> {{ $subs_log->subscription_log_id }} </td>
+                                            <td> {{ $subs_log->subscription_id }} </td>
+                                            <td> {{ $subs_log->user_id }} </td>
+                                            <td> {{ $subs_log->activated_at }} </td>
+                                            <td> {{ $subs_log->billing_date }} </td>
+                                            <td> {{ $subs_log->status }} </td>
                                     </tr>           
                                         @endforeach  
                                 </div> 
@@ -233,12 +237,13 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Subscription_id</th>
-                                        <th>User_id</th>
-                                        <th>Activated_at</th>
-                                        <th>Billing_date</th>
+                                        <th>Subscription log ID</th>
+                                        <th>Subscription ID</th>
+                                        <th>User ID</th>
+                                        <th>Activation date</th>
+                                        <th>Billing date</th>
                                         <th>Status</th>
-                                </tr>
+                                    </tr>
                                     </tfoot>
                                 </table>
                                 </div>
@@ -257,8 +262,6 @@
                     </div> 
                 </div> 
         
-    </form> 
-    <!-- form end -->
 
 </div>
 
