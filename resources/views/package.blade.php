@@ -9,11 +9,12 @@
         
         text-align:center;
         }
+        /*
         #pacakge_d_f {
         position:relative;
         top: 50%;
         transform: translateY(-50%);
-        }
+        } */
 </style>
 
 
@@ -61,16 +62,16 @@
                                         </div>
                                         
                                         <div class="col-sm-6">
-                                                <!--
-                                                    @if ($errors->any())
-                                                        <div class="alert alert-danger" role="alert">
-                                                            Please fix the following errors
-                                                        </div>
-                                                    @endif
-                                                -->
                                                     <div class="form-group">
                                                         <label for="pk_id">Package Name</label>
+                                                        <!--
                                                         <input type="text" class="form-control" id="pk_id" name="pk_id" placeholder="Package name" value="{{ old('pk_id') }}">
+                                                        -->
+                                                        <select name = "pk_id">
+                                                            @foreach($packages as $package)  
+                                                            <option value= "{{ $package->package_id }}" >{{ $package->package_name }} </option>
+                                                            @endforeach
+                                                        </select>                                                           
                                                     </div>
                                                 
                                                     <div class="form-group">
@@ -96,18 +97,20 @@
                             
             
                         </div> <!-- row end -->
-
+    </form> <!-- form end -->
                         <!-- Row start - package list -->
                                     <section>
                             <div class="row">
                                 <div class="col-xs-12">
                                 <div class="box">
                                     <div class="box-header">
+                                    <!--
                                         <div class="row">
                                             <div class="col-sm-8">
                                             <h3 class="box-title-center"><h2>Packages list</h2></h3> 
                                             </div>
                                         </div>
+                                    -->
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
@@ -117,17 +120,19 @@
                                             <th>Package ID</th>
                                             <th>Package Name</th>
                                             <th>Version</th>
+                                            <th>Price</th>
                                             <th>Description</th>
                                             <th>Creation Date</th>
                                     </tr>
                                         </thead>
                                         <tbody>
                                         <div>
-                                            @foreach($packages as $package)  
+                                            @foreach($packagesd as $package)  
                                         <tr>       
                                                 <td> {{ $package->package_id }} </td>
                                                 <td> {{ $package->package_name }} </td>
                                                 <td> {{ $package->version }} </td>
+                                                <td> {{ $package->price }} </td>
                                                 <td> {{ $package->description }} </td>
                                                 <td> {{ $package->created_at }} </td>
                                         </tr>           
@@ -140,6 +145,7 @@
                                         <th>Package ID</th>
                                         <th>Package Name</th>
                                         <th>Version</th>
+                                        <th>Price</th>
                                         <th>Description</th>
                                         <th>Creation Date</th>
                                 </tr>
@@ -160,36 +166,42 @@
                     </div>
         
                     <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab"> 
-                        <div class="row">
-                        </div> <!-- temp row -->
-
-                        <!-- test code
-                        <div class="btn-group"> <a class="btn btn-default dropdown-toggle btn-select" href="#" data-toggle="dropdown">Package Name<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                            @foreach($packages as $package)  
-                                                <li><a href="#">{{ $package->package_name }}</a></li>
-                                            @endforeach 
-                                            </ul>
-                        </div>  test code --> 
 
                         <!-- Row start - package detail input -->
                         <div class="row">
-                                <div class="col-sm-4">
+                            
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="package_id">Package ID</label>
+                                        <!--
                                         <input type="text" class="form-control" id="package_id" name="package_id" placeholder="Package ID" value="{{ old('pacakge_id') }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
+                                        -->
+                                        <select name = "package_id">
+                                                            <option value= "">Select package name </option>
+                                                            @foreach($packages as $package)  
+                                                            <option value= "{{ $package->package_id }}" >{{ $package->package_name }} </option>
+                                                            @endforeach
+                                        </select>                                         
+                                                                                                                             
                                         <label for="product_id">Product ID</label>
+                                        <!--
                                         <input type="text" class="form-control" id="product_id" name="product_id" placeholder="Product ID" value="{{ old('product_id') }}">
+                                        -->
+                                        <select name = "product_id">
+                                                            <option value= "">Select product name </option>
+                                                            @foreach($products as $product)  
+                                                            <option value= "{{ $product->product_id }}" >{{ $product->product_name }} </option>
+                                                            @endforeach
+                                        </select>                                         
+                                        <button type="submit" id= "package_d_f1" class="btn btn-success">Save Package Details</button>
+
                                     </div>
+                                
+                                
+                                    
                                 </div>
-                                <div id= "pack" class="col-sm-4">
-                                    <button type="submit" id= "package_d_f" class="btn btn-success">Save Package Details</button>
-                                </div>
-                        </div>
+                            
+                        </div>    
                         <!-- Row end - package detail input -->
                         <!-- Row start - package detail list -->
                         <section>
@@ -197,17 +209,20 @@
                                 <div class="col-xs-12">
                                 <div class="box">
                                     <div class="box-header">
+                                    <!--
                                         <div class="row">
                                             <div class="col-sm-8">
                                             <h3 class="box-title-center"><h2>Package details list</h2></h3> 
                                             </div>
                                         </div>
+                                    -->
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <table id="example1" class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
+                                            <th>Package Detail ID</th>
                                             <th>Package ID</th>
                                             <th>Package Name</th>
                                             <th>Product ID</th>
@@ -217,13 +232,14 @@
                                         </thead>
                                         <tbody>
                                         <div>
-                                            @foreach($packages as $package)  
+                                            @foreach($details as $detail)  
                                         <tr>       
-                                                <td> {{ $package->package_id }} </td>
-                                                <td> {{ $package->package_name }} </td>
-                                                <td> {{ $package->version }} </td>
-                                                <td> {{ $package->description }} </td>
-                                                <td> {{ $package->created_at }} </td>
+                                                <td> {{ $detail->package_detail_id }} </td>
+                                                <td> {{ $detail->package_id }} </td>
+                                                <td> {{ $detail->package_name }} </td>
+                                                <td> {{ $detail->product_id }} </td>
+                                                <td> {{ $detail->product_name }} </td>
+                                                <td> {{ $detail->created_at }} </td>
                                         </tr>           
                                             @endforeach  
                                     </div> 
@@ -231,6 +247,7 @@
                                         </tbody>
                                         <tfoot>
                                         <tr>
+                                        <th>Package Detail ID</th>
                                         <th>Package ID</th>
                                         <th>Package Name</th>
                                         <th>Product ID</th>
@@ -256,7 +273,7 @@
                     </div> 
                 </div> 
         
-    </form> <!-- form end -->
+    
 
     
 

@@ -22,8 +22,8 @@
                                     <div class="col-sm-6" >
                                         <h3>Rate Plan Input</h3>
                                                                                                                                                                                 
-                                        <form action="{{route('rate_plan')}}" method="post">
-
+                                        <form action="{{action('userController@rate_plan_post')}}" method="post">
+                                        
                                             {!! csrf_field() !!}
                                                 <div class="form-group">
                                                     <label for="rate_name">Rate Plan Name</label>
@@ -32,11 +32,37 @@
                                             
                                                 <div class="form-group">
                                                     <label for="type">Product/Package</label>
+                                                    <!--
                                                     <input type="text" class="form-control" id="type" name="type" placeholder="Product or Package" value="{{ old('type') }}">
+                                                    -->
+                                                    <select name = "ipropac" onChange="makeSelect(this)">
+                                                        <option value= "product" >Product</option>
+                                                        <option value= "package" >Package</option>
+                                                    </select>                                               
+
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="selected_id">Product/Package ID</label>
+                                                    <label for="selected_id_pro">Product ID</label>
+                                                    <!--
                                                     <input type="text" class="form-control" id="selected_id" name="selected_id" placeholder="Product or Package" value="{{ old('selected_id') }}">
+                                                    -->
+                                                    <select name = "selected_id_pro" id= "selected_id_pro">
+                                                    @foreach($products as $product)  
+                                                    <option value= "{{ $product->product_id }}" >{{ $product->product_name }} </option>
+                                                    @endforeach
+                                                    </select>                                             
+
+                                                    <label for="selected_id_pac">Package ID</label>
+                                                    <!--
+                                                    <input type="text" class="form-control" id="selected_id" name="selected_id" placeholder="Product or Package" value="{{ old('selected_id') }}">
+                                                    -->
+                                                    <select name = "selected_id_pac" id= "selected_id_pac">
+                                                    @foreach($packages as $package)  
+                                                    <option value= "{{ $package->package_id }}" >{{ $package->package_name }} </option>
+                                                    @endforeach
+                                                    </select>                                             
+
+
                                                 </div>
 
                                                 <div class="form-group">
@@ -65,11 +91,13 @@
                                 <div class="col-xs-12">
                                 <div class="box">
                                     <div class="box-header">
+                                    <!--
                                         <div class="row">
                                             <div class="col-sm-8">
                                             <h3 class="box-title-center"><h2>Rate Plans list</h2></h3> 
                                             </div>
                                         </div>
+                                    -->
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
@@ -130,15 +158,17 @@
                             <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
+                                <!--
                                     <div class="row">
                                         <div class="col-sm-8">
                                         <h3 class="box-title-center"><h2>Packages list</h2></h3> 
                                         </div>
                                     </div>
+                                -->
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
-                                <table id="example2" class="table table-bordered table-hover">
+                                <table id="example1" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
                                         <th>Package ID</th>
@@ -193,15 +223,17 @@
                         <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
+                            <!--
                                 <div class="row">
                                     <div class="col-sm-8">
                                     <h3 class="box-title-center"><h2>Product list</h2></h3> 
                                     </div>
                                 </div>
+                            -->
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="example3" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>Product ID</th>
@@ -250,4 +282,21 @@
                     <!-- tabpanel profile-tab1 end -->
 
     </div>
+    <script>
+        function makeSelect(itype)
+        {
+            
+            if (itype.value == "product")
+            {
+                
+                document.getElementById("selected_id_pro").disabled = false; 
+                document.getElementById("selected_id_pac").disabled = true;               
+            }
+            if (itype.value =="package")
+            {
+                document.getElementById("selected_id_pro").disabled = true;
+                document.getElementById("selected_id_pac").disabled = false;
+            }
+        }     
+    </script>
 @endsection

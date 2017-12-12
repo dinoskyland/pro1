@@ -65,11 +65,13 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
+            <!--
                 <div class="row">
                   <div class="col-sm-8">
                     <h3 class="box-title-center"><h2>Payments Type list</h2></h3> 
                     </div>
                 </div>
+            -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
