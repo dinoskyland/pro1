@@ -29,6 +29,7 @@
     <!-- form begin -->
     <form action="{{ action('userController@sub_sum_post') }}" method="post">
 
+
             <ul id="myTab" class="nav nav-tabs" role="tablist"> 
                 <li role="presentation" class="active"><a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><h4>Subscription Summary</h4></a></li> 
                 <li role="presentation" class=""><a data-target="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false"><h4>Subscription Logs</h4></a></li> 
@@ -44,104 +45,114 @@
             </ul> 
                 <div id="myTabContent" class="tab-content"> 
                     <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab"> 
-                        <div class="row">           
-                            <div class="col-sm-4">
-                            {!! csrf_field() !!}
-
-                                <div class="form-group">
-                                    <label for="ieuser_id">User ID</label>
-                                    <input type="text" class="form-control" id="ieuser_id" name="ieuser_id" placeholder="User ID" value="{{ old('ieuser_id') }}">
-                                </div>
-                            </div>
                     
-                        </div>
-                        <div class="row">    
-                            <div class="col-sm-8">
-                                <div class="form-group">    
-
-                                    <label for="ipay_type">Payment Type</label>
-                                    <!--
-                                    <input type="text" class="form-control" id="ipay_type" name="ipay_type" placeholder="Payment type" value="{{ old('ipay_type') }}">
-                                    -->
-                                    <select name = "ipay_type">
-                                        @foreach($pays as $pay)  
-                                        <option value= "{{ $pay->payment_type_id }}" >{{ $pay->p_kind }} </option>
-                                        @endforeach
-                                    </select>                                                                                                                                
-                                
-                                    <label for="ipay_time">Payment Period</label>
-                                    <!--
-                                    <input type="text" class="form-control" id="ipay_time" name="ipay_time" placeholder="Payment cycle" value="{{ old('ipay_time') }}">                         
-                                    -->
-                                    <select name = "ipay_time">
-                                        @foreach($times as $time_s)  
-                                        <option value= "{{ $time_s->time_unit_id }}" >{{ $time_s->kind }} </option>
-                                        @endforeach
-                                    </select>                                   
-                                
-                                    <label for="irate_plan">Rate Plan</label>
-                                    <!--
-                                    <input type="text" class="form-control" id="irate_plan" name="irate_plan" placeholder="Rate Plan" value="{{ old('irate_plan') }}">
-                                    -->
-                                    <select name = "irate_plan">
-                                        @foreach($rates as $rate)  
-                                        <option value= "{{ $rate->rate_plan_id }}" >{{ $rate->rate_plan_name }} </option>
-                                        @endforeach
-                                    </select>                                             
-                                                                                                                                                                                                
-                                    <label for="istatus">Status</label>
-                                    <!--
-                                    <input type="text" class="form-control" id="istatus" name="istatus" placeholder="Active" value="{{ old('istatus') }}">
-                                    -->
-                                    <select name = "istatus">
-                                        <option value= "Active" >Active </option>
-                                        <option value= "Trial" >Trial </option>
-                                        <option value= "Suspend" >Suspend</option>
-                                    </select>      
-                            </div>
-                        </div>
-
-                         </div>
-
-                        <div class="row">                         
-                            <div class="col-sm-8">
-                                            <div class="form-group">
-                                                {!! Form::label('Activation Date') !!}
-                                                {!! Form::date('iact_date', \Carbon\Carbon::now()) !!}
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="idescription">Description</label>
-                                                <textarea class="form-control" id="idescription" name="idescription" placeholder="Description">{{ old('idescription') }}</textarea>
-                                            </div>
-                                            <!--
-                                            <div class="form-group">
-                                                <label for="change_date">Change Date</label>
-                                                <input type="text" class="form-control" id="change_date" name="change_date" placeholder="Change Date" value="{{ old('change_date') }}">
-                                            </div>  -->
-                                            
-                                            
-                                            <button type="submit" id= "ibtn1" class="btn btn-success">Add Subscription</button>
-                            </div>                          
-                            
-            
-                        </div> <!-- row end -->
-                    
-    </form> 
-    <!-- form end -->
 
                         <!-- Row start - package list -->
-                        <section class="content">
+                        <section>
                         <div class="row">
                             <div class="col-xs-12">
                             <div class="box">
                                 <div class="box-header">
-                                <!--
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                        <h3 class="box-title-center"><h2>Subscriptions list</h2></h3> 
-                                        </div>
+
+
+
+
+
+
+
+
+                                <div class="row">           
+                                <div class="col-sm-4">
+                                {!! csrf_field() !!}
+    
+                                    <div class="form-group">
+                                        <label for="ieuser_id">User ID</label>
+                                        <input type="text" class="form-control" id="ieuser_id" name="ieuser_id" placeholder="User ID" value="{{ old('ieuser_id') }}">
                                     </div>
-                                -->
+                                </div>
+                        
+                            </div>
+                            <div class="row">    
+                                <div class="col-sm-8">
+                                    <div class="form-group">    
+    
+                                        <label for="ipay_type">Payment Type</label>
+                                        <!--
+                                        <input type="text" class="form-control" id="ipay_type" name="ipay_type" placeholder="Payment type" value="{{ old('ipay_type') }}">
+                                        -->
+                                        <select name = "ipay_type">
+                                            @foreach($pays as $pay)  
+                                            <option value= "{{ $pay->payment_type_id }}" >{{ $pay->p_kind }} </option>
+                                            @endforeach
+                                        </select>                                                                                                                                
+                                    
+                                        <label for="ipay_time">Payment Period</label>
+                                        <!--
+                                        <input type="text" class="form-control" id="ipay_time" name="ipay_time" placeholder="Payment cycle" value="{{ old('ipay_time') }}">                         
+                                        -->
+                                        <select name = "ipay_time">
+                                            @foreach($times as $time_s)  
+                                            <option value= "{{ $time_s->time_unit_id }}" >{{ $time_s->kind }} </option>
+                                            @endforeach
+                                        </select>                                   
+                                    
+                                        <label for="irate_plan">Rate Plan</label>
+                                        <!--
+                                        <input type="text" class="form-control" id="irate_plan" name="irate_plan" placeholder="Rate Plan" value="{{ old('irate_plan') }}">
+                                        -->
+                                        <select name = "irate_plan">
+                                            @foreach($rates as $rate)  
+                                            <option value= "{{ $rate->rate_plan_id }}" >{{ $rate->rate_plan_name }} </option>
+                                            @endforeach
+                                        </select>                                             
+                                                                                                                                                                                                    
+                                        <label for="istatus">Status</label>
+                                        <!--
+                                        <input type="text" class="form-control" id="istatus" name="istatus" placeholder="Active" value="{{ old('istatus') }}">
+                                        -->
+                                        <select name = "istatus">
+                                            <option value= "Active" >Active </option>
+                                            <option value= "Trial" >Trial </option>
+                                            <option value= "Suspend" >Suspend</option>
+                                        </select>      
+                                </div>
+                            </div>
+    
+                             </div>
+    
+                            <div class="row">                         
+                                <div class="col-sm-8">
+                                                <div class="form-group">
+                                                    {!! Form::label('Activation Date') !!}
+                                                    {!! Form::date('iact_date', \Carbon\Carbon::now()) !!}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="idescription">Description</label>
+                                                    <textarea class="form-control" id="idescription" name="idescription" placeholder="Description">{{ old('idescription') }}</textarea>
+                                                </div>
+                                                <!--
+                                                <div class="form-group">
+                                                    <label for="change_date">Change Date</label>
+                                                    <input type="text" class="form-control" id="change_date" name="change_date" placeholder="Change Date" value="{{ old('change_date') }}">
+                                                </div>  -->
+                                                
+                                                
+                                                <button type="submit" id= "ibtn1" class="btn btn-success">Add Subscription</button>
+                                </div>                          
+                                
+                
+                            </div> <!-- row end -->
+    
+
+
+
+
+
+
+
+
+
+
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
@@ -157,6 +168,7 @@
                                         <th>Activation Date</th>
                                         <th>Billing Date</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                 </tr>
                                     </thead>
                                     <tbody>
@@ -172,6 +184,13 @@
                                             <td> {{ $sub->activated_at }} </td>
                                             <td> {{ $sub->billing_date }} </td>
                                             <td> {{ $sub->status }} </td>
+                                            <td> 
+                                                <select name = "{{ $sub->subscription_view_id }}" id= "{{ $sub->subscription_view_id }}" onChange="makeSelect(this)">
+                                                    <option value= "Update">Update</option>
+                                                    <option value= "Delete" >Delete </option>
+                                                    <option value= "Suspend" >Suspend</option>
+                                                </select>                                                                                        
+                                            </td>
                                     </tr>           
                                         @endforeach  
                                 </div> 
@@ -189,6 +208,7 @@
                                         <th>Activation Date</th>
                                         <th>Billing Date</th>
                                         <th>Status</th>
+                                        <th>Action</th>
 
                                         </tr>
                                     </tfoot>
@@ -211,6 +231,16 @@
                         </div> <!-- temp row -->
 
 
+                        <!-- Row start - package detail list -->
+                        <section>
+                        <div class="row">
+                            <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+
+
+
+
                         <!-- Row start - subscription input -->
                         <div class="row">
                                 <div class="col-sm-4">
@@ -230,19 +260,15 @@
                                 </div>
                         </div>
                         <!-- Row end - subscription input -->
-                        <!-- Row start - package detail list -->
-                        <section>
-                        <div class="row">
-                            <div class="col-xs-12">
-                            <div class="box">
-                                <div class="box-header">
-                                <!--
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <h3 class="box-title-center"><h2>Subscription Logs</h2></h3> 
-                                        </div>
-                                    </div>
-                                -->
+
+
+
+
+
+
+    </form> 
+    <!-- form end -->
+                                
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
@@ -301,6 +327,36 @@
         
 
 </div>
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            $("p").hide();
+        });
+    });
+
+        function makeSelect(itype)
+        {
+          var ivalue = itype.value;   
+            if (ivalue == "Update")
+            {
+                alert("Update ID no : " + itype.id);
+            }
+            if (ivalue =="Delete")
+            {
+                alert("Delete ID no : " + itype.id  );
+
+            }
+            if (itype.value =="Suspend")
+            {
+                alert("Suspend ID no : " + itype.id );
+
+            }
+
+        }     
+
+
+
+    </script>
 
 @endsection
 

@@ -17,8 +17,27 @@
                 -->
         </ul> 
                 <div id="myTabContent" class="tab-content"> 
-                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">        
-                            <div class="row">  
+                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">    
+
+
+
+
+                            <section>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+
+
+
+
+
+
+
+
+
+                                    <div class="row">  
                                     <div class="col-sm-6" >
                                         <h3>Rate Plan Input</h3>
                                                                                                                                                                                 
@@ -85,19 +104,17 @@
 
                                     </div>
                             </div>
-                            <section>
 
-                            <div class="row">
-                                <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                    <!--
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                            <h3 class="box-title-center"><h2>Rate Plans list</h2></h3> 
-                                            </div>
-                                        </div>
-                                    -->
+
+
+
+
+
+
+
+
+
+
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
@@ -223,13 +240,24 @@
                         <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                            <!--
-                                <div class="row">
-                                    <div class="col-sm-8">
-                                    <h3 class="box-title-center"><h2>Product list</h2></h3> 
-                                    </div>
-                                </div>
-                            -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">

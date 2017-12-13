@@ -2,12 +2,28 @@
 
 @section('content')
     <div class="container">
-       <div class="row">
-          <h1>Payment Type Management</h1>
-       </div> 
-        <div class="row">
+    <ul id="myTab" class="nav nav-tabs" role="tablist"> 
+                <li role="presentation" class="active"><a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><h4>Payment type Information</h4></a></li> 
+                <!--
+                <li role="presentation" class="dropdown"> <a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown 
+                    <span class="caret"></span></a> 
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents"> 
+                    <li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li> 
+                    <li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li> 
+                    </ul> 
+                </li> 
+                -->
+    </ul> 
+    <div id="myTabContent" class="tab-content"> 
+    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 
-            <div class="col-xs-6">
+        <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+            <div class="row">
+
+            <div class="col-xs-12">
                 <!--                           
                 <form id= "payment" name="payment" action="{{route('payment_type')}}" method="post">
                     @if ($errors->any())
@@ -36,23 +52,23 @@
                 -->
                 {!! Form::open(array('route' => 'payment_type', 'class' => 'form')) !!}
 
-                        <div class="form-group">
+                        <div class="form-inline">
                             {!! Form::label('Payment Type') !!}
                             {!! Form::text('p_kind', null, 
                                 array('required', 
                                     'class'=>'form-control', 
                                     'placeholder'=>'Payment type')) !!}
-                        </div>
+                        
 
-                        <div class="form-group">
+                        
                             {!! Form::label('Description') !!}
                             {!! Form::text('description', null, 
                                 array('required', 
                                     'class'=>'form-control', 
                                     'placeholder'=>'Description')) !!}
-                        </div>
+                        
 
-                        <div class="form-group">
+                        
                             {!! Form::submit('Save payment type', 
                             array('class'=>'btn btn-success')) !!}
                         </div>
@@ -60,18 +76,13 @@
                 {!! Form::close() !!}
             </div>
         </div>
-
-        <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-            <!--
+        <!--            
                 <div class="row">
                   <div class="col-sm-8">
                     <h3 class="box-title-center"><h2>Payments Type list</h2></h3> 
                     </div>
                 </div>
-            -->
+        -->        
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -112,7 +123,9 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-
+    
+    </div> <!-- tabpanel end -->
+    </div> <!-- myTabContent end -->
 
 
     </div>

@@ -39,7 +39,21 @@
             </ul> 
                 <div id="myTabContent" class="tab-content"> 
                     <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab"> 
-                        <div class="row">           
+
+                        <!-- Row start - package list -->
+                                    <section>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                    <!--
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                            <h3 class="box-title-center"><h2>Packages list</h2></h3> 
+                                            </div>
+                                        </div>
+                                    -->
+                                    <div class="row">           
                     
                             
                                         <div class="col-sm-6">
@@ -97,22 +111,12 @@
                             
             
                         </div> <!-- row end -->
-    </form> <!-- form end -->
-                        <!-- Row start - package list -->
-                                    <section>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                    <!--
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                            <h3 class="box-title-center"><h2>Packages list</h2></h3> 
-                                            </div>
-                                        </div>
-                                    -->
+                                    
                                     </div>
                                     <!-- /.box-header -->
+        </form> <!-- form end -->
+
+
                                     <div class="box-body">
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
@@ -167,6 +171,20 @@
         
                     <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab"> 
 
+
+                        <!-- Row start - package detail list -->
+                        <section>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                    <!--
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                            <h3 class="box-title-center"><h2>Package details list</h2></h3> 
+                                            </div>
+                                        </div>
+                                    -->
                         <!-- Row start - package detail input -->
                         <div class="row">
                             
@@ -202,20 +220,7 @@
                                 </div>
                             
                         </div>    
-                        <!-- Row end - package detail input -->
-                        <!-- Row start - package detail list -->
-                        <section>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                    <!--
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                            <h3 class="box-title-center"><h2>Package details list</h2></h3> 
-                                            </div>
-                                        </div>
-                                    -->
+                        <!-- Row end - package detail input -->                                    
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">

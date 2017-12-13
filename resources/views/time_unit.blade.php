@@ -2,13 +2,41 @@
 
 @section('content')
     <div class="container">
+    <!--
        <div class="row">
           <h1>Time Unit Management</h1>
        </div> 
+    -->
+
+    <ul id="myTab" class="nav nav-tabs" role="tablist"> 
+                <li role="presentation" class="active"><a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><h4>Time Unit Information</h4></a></li> 
+                <!--
+                <li role="presentation" class="dropdown"> <a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown 
+                    <span class="caret"></span></a> 
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents"> 
+                    <li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li> 
+                    <li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li> 
+                    </ul> 
+                </li> 
+                -->
+    </ul> 
+    <div id="myTabContent" class="tab-content"> 
+    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab"> 
+
+
+
+
         <div class="row">
-           <div class="col-sm-6">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+            
+
+    
+            <div class="row">
+           <div class="col-sm-8">
                         
-                <form name="time" action="{{route('time_unit')}}" method="post">
+                <form class="form-inline"  name="time" action="{{route('time_unit')}}" method="post">
                     @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
                             Please fix the following errors
@@ -35,18 +63,7 @@
             </div>
 
         </div>
-
-        <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-            <!--
-                <div class="row">
-                    <div class="col-sm-8">
-                    <h3 class="box-title-center"><h2>Time Units list</h2></h3> 
-                    </div>
-                </div>
-            -->
+                
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -88,7 +105,8 @@
       </div>
       <!-- /.row -->
 
-
+    </div> <!-- tabpanel end -->
+    </div> <!-- myTabContent end -->
 
 
 
