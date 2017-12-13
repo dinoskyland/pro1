@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class subscription extends Model
 {
+    public $primarykey = 'subscription_id';
     protected $fillable = [
         'rate_plan_id',
         'user_id',

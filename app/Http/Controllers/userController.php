@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\time_unit;
 use App\payment_type;
+use App\subscription_view;
+use App\subscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -124,6 +126,174 @@ class userController extends Controller
             
             return redirect('/sub_sum');
     }
+
+    public function sub_active()
+    {
+        /*
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+
+        */  
+        /*
+                DB::update('update subscription_views set status = "Suspend" where subscription_view_id =?', array($request->id));
+                DB::update('update subscriptions set status = "Suspend" where subscription_id =?', array($request->id));
+                DB::select('call save_sub_log(?)', array($request->id));
+        */        
+            return redirect('/sub_sum');
+            
+    }
+
+
+    public function sub_active_post(Request $request)
+    {
+        /*
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+
+        */  
+        DB::table('subscription_views')->where('subscription_view_id', '=', $request->id)
+        ->update([
+            'status'=>'Active',
+            'activated_at'=>\Carbon\Carbon::now(),
+        ]); 
+
+        DB::table('subscription_views')->where('subscription_view_id', '=', $request->id)
+        ->update([
+            'status'=>'Active',
+            'activated_at'=>\Carbon\Carbon::now(),
+        ]); 
+        /*
+                DB::update('update subscription_views set status = "Active" where subscription_view_id =?', array($request->id));
+                DB::update('update subscriptions set status = "Active" where subscription_id =?', array($request->id));
+        */
+                DB::select('call save_sub_log(?)', array($request->id));
+                
+            return redirect('/sub_sum');
+            
+    }
+
+
+    public function sub_suspend()
+    {
+        /*
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+
+        */  
+        /*
+                DB::update('update subscription_views set status = "Suspend" where subscription_view_id =?', array($request->id));
+                DB::update('update subscriptions set status = "Suspend" where subscription_id =?', array($request->id));
+                DB::select('call save_sub_log(?)', array($request->id));
+        */        
+            return redirect('/sub_sum');
+            
+    }
+
+
+    public function sub_suspend_post(Request $request)
+    {
+        /*
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+
+        */  
+        /*
+        $sub_view = new subscription_view;
+        $sub_sub = new subscription;        
+
+        $sub_view = subscription_view::where('subscription_view_id',array($request->id));
+        $sub_sub = subscription::where('subscription_id',array($request->id));
+        
+        $sub_view->status = 'Suspend';
+        $sub_view->suspended_date = \Carbon\Carbon::now();
+        $sub_view->update();
+
+        $sub_sub->status = 'Suspend';
+        $sub_sub->suspended_date = \Carbon\Carbon::now();                
+        $sub_sub->update();        
+        */
+
+        DB::table('subscription_views')->where('subscription_view_id', '=', $request->id)
+        ->update([
+            'status'=>'Suspend',
+            'suspended_date'=>\Carbon\Carbon::now(),
+        ]); 
+
+
+        DB::table('subscriptions')->where('subscription_id', '=', $request->id)
+        ->update([
+            'status'=>'Suspend',
+            'suspended_date'=>\Carbon\Carbon::now(),
+        ]); 
+
+            /*
+                DB::update('update subscription_views set status = "Suspend", suspended_date = '.\Carbon\Carbon::now().' where subscription_view_id =?', array($request->id));
+                DB::update('update subscriptions set status = "Suspend" , suspended_date = ? where subscription_id =?', array($request->id));
+            */
+                DB::select('call save_sub_log(?)', array($request->id));
+                
+            return redirect('/sub_sum');
+            
+    }
+
+    public function sub_delete()
+    {
+        /*
+        $subs = subscription::all(); //DB::select('select email from eusers;');
+        
+        return view('userList',['subs'=>$subs]);
+        //return 'User List'.$usersview('userList',['users'=>$users]);
+        */
+        $subsc = DB::select('select * from subscription_views');      
+        $subs_logs = DB::select('select * from subscription_logs');      
+        $times = DB::select('select * from time_units');      
+        $pays = DB::select('select * from payment_types');      
+        //$eusers = DB::select('select * from users');     
+        $rates = DB::select('select * from rate_plans');             
+        //$packages = DB::select('select * from packages');      
+        //$products = DB::select('select * from products');      
+        //return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,
+        //                       'eusers'=>$eusers,'rates'=>$rates,'packages'=>$packages,'products'=>$products]);
+        return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,'rates'=>$rates]);
+
+    }
+
+
+
+    public function sub_delete_post(Request $request)
+    {
+        /*
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+
+        */  
+                DB::update('update subscription_views set status = "Withdraw" where subscription_view_id =?', array($request->id));
+                DB::update('update subscriptions set status = "Withdraw" where subscription_id =?', array($request->id));
+                DB::select('call save_sub_log(?)', array($request->id));
+                
+            return redirect('/sub_sum');
+            
+    }
+
+
+
+
+
 
     public function product()
     {

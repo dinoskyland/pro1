@@ -45,9 +45,17 @@ Route::post('/time_unit','userController@time_unit_post')->name('time_unit');
 Route::get('/payment_type','userController@payment')->name('payment_type');
 Route::post('/payment_type','userController@payment_post')->name('payment_type');
 
-
 Route::get('/sub_sum','userController@sub_sum')->name('sub_sum');
 Route::post('/sub_sum','userController@sub_sum_post')->name('sub_sum');
+
+Route::get('/sub_active','userController@sub_active')->name('sub_active');
+Route::post('/sub_active','userController@sub_active_post')->name('sub_active');
+
+Route::get('/sub_suspend','userController@sub_suspend')->name('sub_suspend');
+Route::post('/sub_suspend','userController@sub_suspend_post')->name('sub_suspend');
+
+Route::get('/sub_delete','userController@sub_delete')->name('sub_delete');
+Route::post('/sub_delete','userController@sub_delete_post')->name('sub_delete');
 
 Auth::routes();
 

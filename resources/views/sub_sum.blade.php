@@ -156,6 +156,7 @@
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
+                                <div id="output" class="container"></div>
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
@@ -185,10 +186,11 @@
                                             <td> {{ $sub->billing_date }} </td>
                                             <td> {{ $sub->status }} </td>
                                             <td> 
-                                                <select name = "{{ $sub->subscription_view_id }}" id= "{{ $sub->subscription_view_id }}" onChange="makeSelect(this)">
+                                                <select name = "isub" id= "{{ $sub->subscription_view_id }}" onChange="makeSelect(this)">
                                                     <option value= "Update">Update</option>
-                                                    <option value= "Delete" >Delete </option>
-                                                    <option value= "Suspend" >Suspend</option>
+                                                    <option value= "Active" >Active </option>
+                                                    <option value= "Suspend" >Suspend </option>
+                                                    <option value= "Withdraw" >Withdraw</option>
                                                 </select>                                                                                        
                                             </td>
                                     </tr>           
@@ -327,28 +329,58 @@
         
 
 </div>
+<script src="/axios/dist/axios.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $("button").click(function(){
-            $("p").hide();
-        });
-    });
 
         function makeSelect(itype)
         {
-          var ivalue = itype.value;   
+          var ivalue = itype.value;  
+          var output = document.getElementById('output');
             if (ivalue == "Update")
             {
                 alert("Update ID no : " + itype.id);
+
+                /*
+                .then(function(res) {
+
+                    output.className = 'container';
+              output.innerHTML = res.data;
+                    
+                })
+                .catch(function(err) {
+                });*/
             }
-            if (ivalue =="Delete")
+            if (ivalue == "Active")
             {
-                alert("Delete ID no : " + itype.id  );
+                alert("Active ID no : " + itype.id  );
+                axios.post('{{route('sub_active')}}',
+                {id : itype.id}).then(function(res) {
+                    //output.className = 'container';
+                    //output.innerHTML = res.data;
+
+                });
+            }
+
+            if (ivalue =="Suspend")
+            {
+                alert("Suspend ID no : " + itype.id  );
+                axios.post('{{route('sub_suspend')}}',
+                {id : itype.id}).then(function(res) {
+                    //output.className = 'container';
+                    //output.innerHTML = res.data;
+
+                });
 
             }
-            if (itype.value =="Suspend")
+            if (itype.value == "Withdraw")
             {
-                alert("Suspend ID no : " + itype.id );
+                alert("Withdraw ID no : " + itype.id );
+                axios.post('{{route('sub_delete')}}',
+                {id : itype.id}).then(function(res) {
+                    //output.className = 'container';
+                    //output.innerHTML = res.data;
+
+                });
 
             }
 
