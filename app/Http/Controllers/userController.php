@@ -11,10 +11,22 @@ use Illuminate\Http\Request;
 class userController extends Controller
 {
 
-    public function adminLTE()
+
+    
+    public function adminLTE(Request $request)
     {
-        return view('adminLTE');
+        $eusers = DB::select('select * from users where id = ?',array($request['id']));
+        return view('adminLTE',['eusers'=>$eusers]);        
     }    
+
+
+    public function adminLTE_post(Request $request)
+    {
+        $eusers = DB::select('select * from users where id = ?',array($request['id']));
+        return view('adminLTE',['eusers'=>$eusers]);        
+    }    
+
+
     //
     public function euser()
     {
@@ -56,7 +68,7 @@ class userController extends Controller
         //$products = DB::select('select * from products');      
         //return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,
         //                       'eusers'=>$eusers,'rates'=>$rates,'packages'=>$packages,'products'=>$products]);
-        return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,'rates'=>$rates]);
+        return view('sub_sum1',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,'rates'=>$rates]);
 
     }
 
@@ -124,8 +136,161 @@ class userController extends Controller
 
             DB::commit();    
             
-            return redirect('/sub_sum');
+            return redirect('/sub_sum1');
     }
+
+
+    public function sub_update(Request $request)
+    {
+        /*
+        $subs = subscription::all(); //DB::select('select email from eusers;');
+        
+        return view('userList',['subs'=>$subs]);
+        //return 'User List'.$usersview('userList',['users'=>$users]);
+        */
+        $subdesig = DB::select('select * from subscription_views where subscription_view_id= ?',array($request['id']));
+        $subsc = DB::select('select * from subscription_views');      
+        $subs_logs = DB::select('select * from subscription_logs');      
+        $times = DB::select('select * from time_units');      
+        $pays = DB::select('select * from payment_types');      
+        //$eusers = DB::select('select * from users');     
+        $rates = DB::select('select * from rate_plans');             
+        //$packages = DB::select('select * from packages');      
+        //$products = DB::select('select * from products');      
+        //return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,
+        //                       'eusers'=>$eusers,'rates'=>$rates,'packages'=>$packages,'products'=>$products]);
+        return view('/sub_file/sub_update',['subdesig'=>$subdesig,'subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,'rates'=>$rates]);
+
+    }
+
+    public function sub_update_post(Request $request)
+    {
+        /*
+            $data = $request->validate([
+                'iuser_id' => 'required|max:30',
+                'ipay_time' => 'max:20',
+                'idescription' => 'max:30',
+              ]);
+        */  
+         /* 
+            DB::table('subscriptions')->insert(array(  'rate_plan_id'=>$request['irate_plan'], 
+                                                    'user_id'=>$request['ieuser_id'],
+                                                    'activated_at'=>$request['iact_date'],
+                                                    'payment_id'=>$request['ipay_type'],
+                                                    'time_unit_id'=>$request['ipay_time'],
+                                                    'status'=>$request['istatus'],
+                                                    'description'=>$request['idescription'],
+                                                    'created_at'=>\Carbon\Carbon::now(),
+                                                    'updated_at'=>\Carbon\Carbon::now() ));
+
+            $rate_plans = DB::select('select rate_plan_name from rate_plans where rate_plan_id = ?',array($request['irate_plan']));                                                    
+            foreach($rate_plans as $rate_plan) 
+                                        
+
+            $eusers = DB::select('select name, email from users where id = ?',array($request['ieuser_id']));                                                    
+            foreach($eusers as $euser) 
+
+            $pay_types = DB::select('select p_kind from payment_types where payment_type_id = ?',array($request['ipay_type']));                                                    
+            foreach($pay_types as $pay_type) 
+            
+            $time_types = DB::select('select kind from time_units where time_unit_id = ?',array($request['ipay_time']));                                                    
+            foreach($time_types as $time_type) 
+
+
+            DB::commit();                                                                
+            $subIds = DB::select('select subscription_id, billing_date from subscriptions where user_id = ?',array($request['ieuser_id']));                                                    
+            foreach($subIds as $subId) 
+            $billID = $subId;
+            
+                DB::select('CALL calc_billing(?)',array($subId->subscription_id));
+                DB::select('CALL save_sub_log(?)',array($subId->subscription_id));               
+
+                $billIds = DB::select('select billing_date from subscriptions where subscription_id = ?',array($billID->subscription_id));                                                    
+                foreach($billIds as $billId) 
+                DB::table('subscription_views')->insert(array( 'subscription_view_id'=>$billID->subscription_id,
+                                                                'rate_plan_id'=>$request['irate_plan'],
+                                                                'rate_plan_name'=>$rate_plan->rate_plan_name,
+                                                                'user_id'=>$request['ieuser_id'],
+                                                                'name'=>$euser->name,
+                                                                'email'=>$euser->email,
+                                                                'activated_at'=>$request['iact_date'],
+                                                                'billing_date'=>$billId->billing_date,
+                                                                'payment_id'=>$request['ipay_type'],
+                                                                'payment_type'=>$pay_type->p_kind,
+                                                                'time_unit_id'=>$request['ipay_time'],
+                                                                'time_type'=>$time_type->kind,                                                           
+                                                                'status'=>$request['istatus'],
+                                                                'description'=>$request['idescription'],
+                                                                'created_at'=>\Carbon\Carbon::now(),
+                                                                'updated_at'=>\Carbon\Carbon::now() ));
+
+
+            DB::commit();    
+            */
+            $rate_plans = DB::select('select rate_plan_name from rate_plans where rate_plan_id = ?',array($request['irate_plan']));                                                    
+            foreach($rate_plans as $rate_plan) 
+                                        
+
+            $eusers = DB::select('select name, email from users where id = ?',array($request['ieuser_id']));                                                    
+            foreach($eusers as $euser) 
+
+            $pay_types = DB::select('select p_kind from payment_types where payment_type_id = ?',array($request['ipay_type']));                                                    
+            foreach($pay_types as $pay_type) 
+            
+            $time_types = DB::select('select kind from time_units where time_unit_id = ?',array($request['ipay_time']));                                                    
+            foreach($time_types as $time_type) 
+
+            $subIds = DB::select('select subscription_id, billing_date from subscriptions where user_id = ?',array($request['ieuser_id']));                                                    
+            foreach($subIds as $subId) 
+            $billID = $subId;
+            
+               // DB::select('CALL calc_billing(?)',array($subId->subscription_id));
+               // DB::select('CALL save_sub_log(?)',array($subId->subscription_id));               
+
+                $billIds = DB::select('select billing_date from subscriptions where subscription_id = ?',array($billID->subscription_id));                                                    
+                foreach($billIds as $billId) 
+
+
+
+
+            DB::table('subscription_views')->where('subscription_view_id', '=', $request['isub_id'])
+            ->update([
+                'rate_plan_id'=>$request['irate_plan'], 
+                'rate_plan_name'=>$rate_plan->rate_plan_name,
+                'user_id'=>$request['ieuser_id'],
+                'name'=>$euser->name,
+                'email'=>$euser->email,                
+                'activated_at'=>$request['iact_date'],
+                'payment_id'=>$request['ipay_type'],
+                'payment_type'=>$pay_type->p_kind,
+                'time_unit_id'=>$request['ipay_time'],
+                'time_type'=>$time_type->kind,                                                                                           
+                'status'=>$request['istatus'],
+                'description'=>$request['idescription'],
+                'updated_at'=>\Carbon\Carbon::now() 
+
+            ]); 
+    
+            DB::table('subscriptions')->where('subscription_id', '=', $request['isub_id'])
+            ->update([
+                'rate_plan_id'=>$request['irate_plan'], 
+                'user_id'=>$request['ieuser_id'],
+                'activated_at'=>$request['iact_date'],
+                'payment_id'=>$request['ipay_type'],
+                'time_unit_id'=>$request['ipay_time'],
+                'status'=>$request['istatus'],
+                'description'=>$request['idescription'],
+                'updated_at'=>\Carbon\Carbon::now() 
+            ]); 
+
+            DB::select('call save_sub_log(?)', array($request['isub_id']));                
+
+            return redirect('/sub_sum1');
+    }
+
+
+
+
 
     public function sub_active()
     {
@@ -142,7 +307,7 @@ class userController extends Controller
                 DB::update('update subscriptions set status = "Suspend" where subscription_id =?', array($request->id));
                 DB::select('call save_sub_log(?)', array($request->id));
         */        
-            return redirect('/sub_sum');
+            return redirect('/sub_sum1');
             
     }
 
@@ -163,7 +328,7 @@ class userController extends Controller
             'activated_at'=>\Carbon\Carbon::now(),
         ]); 
 
-        DB::table('subscription_views')->where('subscription_view_id', '=', $request->id)
+        DB::table('subscriptions')->where('subscription_id', '=', $request->id)
         ->update([
             'status'=>'Active',
             'activated_at'=>\Carbon\Carbon::now(),
@@ -174,7 +339,7 @@ class userController extends Controller
         */
                 DB::select('call save_sub_log(?)', array($request->id));
                 
-            return redirect('/sub_sum');
+            return redirect('/sub_sum1');
             
     }
 
@@ -194,7 +359,7 @@ class userController extends Controller
                 DB::update('update subscriptions set status = "Suspend" where subscription_id =?', array($request->id));
                 DB::select('call save_sub_log(?)', array($request->id));
         */        
-            return redirect('/sub_sum');
+            return redirect('/sub_sum1');
             
     }
 
@@ -244,7 +409,7 @@ class userController extends Controller
             */
                 DB::select('call save_sub_log(?)', array($request->id));
                 
-            return redirect('/sub_sum');
+            return redirect('/sub_sum1');
             
     }
 
@@ -266,7 +431,7 @@ class userController extends Controller
         //$products = DB::select('select * from products');      
         //return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,
         //                       'eusers'=>$eusers,'rates'=>$rates,'packages'=>$packages,'products'=>$products]);
-        return view('sub_sum',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,'rates'=>$rates]);
+        return view('sub_sum1',['subsc'=>$subsc,'subs_logs'=>$subs_logs,'times'=>$times,'pays'=>$pays,'rates'=>$rates]);
 
     }
 
@@ -286,7 +451,7 @@ class userController extends Controller
                 DB::update('update subscriptions set status = "Withdraw" where subscription_id =?', array($request->id));
                 DB::select('call save_sub_log(?)', array($request->id));
                 
-            return redirect('/sub_sum');
+            return redirect('/sub_sum1');
             
     }
 

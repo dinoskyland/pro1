@@ -12,18 +12,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 -->
 <!-- Bootstrap 3.3.2 -->
-<link href="{{ asset("../public/bower_components/admin-lte/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("../clismas/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <!-- Ionicons -->
 <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 <!-- Theme style -->
-<link href="{{ asset("../public/bower_components/admin-lte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("../clismas/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
 <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
       page. However, you can choose any other skin. Make sure you
       apply the skin class to the body tag so the changes take effect.
 -->
-<link href="{{ asset("../public/bower_components/admin-lte/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("../clismas/dist/css/skins/skin-blue.min.css")}}" rel="stylesheet" type="text/css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -92,7 +92,7 @@ desired effect
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="{{ asset("../clismas/dist/img/user2-160x160.jpg")}}" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -177,7 +177,7 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="{{ asset("../clismas/dist/img/user2-160x160.jpg")}}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
@@ -234,7 +234,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="{{ asset("../clismas/dist/img/user2-160x160.jpg")}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -294,6 +294,91 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
+
+
+    <ul id="myTab" class="nav nav-tabs" role="tablist"> 
+                <li role="presentation" class="active"><a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><h4>User Information</h4></a></li> 
+                <!--
+                <li role="presentation" class="dropdown"> <a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown 
+                    <span class="caret"></span></a> 
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents"> 
+                    <li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li> 
+                    <li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li> 
+                    </ul> 
+                </li> 
+                -->
+    </ul> 
+    <div id="myTabContent" class="tab-content"> 
+    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab"> 
+
+
+    <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+                <div class="row">
+                    <div class="col-sm-4">
+                     <a href="{{ url('/register') }}" id="addsub" type="button" class="btn btn-success">Add User<a>
+                    </div>
+
+
+                     <a href="{{ url('/adminLTE/1') }}" id="addsub1" type="button" class="btn btn-success">Test Screen layouts<a>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example2" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>User_id</th>
+                  <th>Email</th>
+                  <th>Creation Date</th>
+                  <th>Register</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <div>
+                          @foreach($eusers as $euser)  
+                     <tr>       
+                            <td> {{ $euser->id }} </td>
+                            <td> {{ $euser->email }} </td>
+                            <td> {{ $euser->created_at }} </td>
+                            <td> {{ $euser->register_id }} </td>
+                     </tr>           
+                          @endforeach  
+                  </div> 
+                          
+                </tbody>
+                <tfoot>
+                <tr>
+                <th>User_id</th>
+                <th>Email</th>
+                <th>Creation Date</th>
+                <th>Register</th>
+              </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+
+  </div><!-- myTab end -->
+  </div><!-- tabpanel end -->
+
+
+
+
 
       <!--------------------------
         | Your Page Content Here |
@@ -396,11 +481,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.1.3 -->
-    <script src="{{ asset ("../public/bower_components/admin-lte/plugins/jQuery/jQuery-2.1.3.min.js") }}"></script>
+    <script src="{{ asset ("../clismas/plugins/jQuery/jQuery-2.2.3.min.js") }}"></script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="{{ asset ("../public/bower_components/admin-lte/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
+    <script src="{{ asset ("../clismas/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset ("../public/bower_components/admin-lte/dist/js/app.min.js") }}" type="text/javascript"></script>
+    <script src="{{ asset ("../clismas/dist/js/app.min.js") }}" type="text/javascript"></script>
 
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
           Both of these plugins are recommended to enhance the

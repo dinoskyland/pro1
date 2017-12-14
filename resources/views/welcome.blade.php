@@ -107,7 +107,7 @@
                     <a href="{{route('euser')}}">Users</a>
                     <a href="{{route('product')}}">Product Features</a>
                     <a href="{{route('time_unit')}}">Basic information process</a>
-                    <a href="{{route('sub_sum')}}">Subscription Summary</a>                  
+                    <a href="{{route('sub_sum1')}}">Subscription Summary</a>                  
                 </div>
 -->
             </div>

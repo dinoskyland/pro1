@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
-<ul id="myTab" class="nav nav-tabs" role="tablist"> 
+<div id="output" class="container">
+
+    <!-- form begin -->
+    <form action="{{ action('userController@sub_sum_post') }}" method="post">
+
+
+    <ul id="myTab" class="nav nav-tabs" role="tablist"> 
                 <li role="presentation" class="active"><a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><h4>User Information</h4></a></li> 
                 <!--
                 <li role="presentation" class="dropdown"> <a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Dropdown 
@@ -27,8 +32,24 @@
                     <div class="col-sm-4">
                      <a href="{{ url('/register') }}" id="addsub" type="button" class="btn btn-success">Add User<a>
                     </div>
+                    <div class="col-sm-4">
+<!--            
+                    @foreach($eusers as $euser)  
+                        <select name = "isub" id= "{{ $euser->id }}" onChange="makeSelect1(this)">
+                            <option value= "Update">Update</option>
+                            <option value= "Active" >Active </option>
+                            <option value= "Suspend" >Suspend </option>
+                            <option value= "Withdraw" >Withdraw</option>
+                        </select>                                                                                        
+                    @endforeach    
+-->                    
+                    </div>
+
                 </div>
             </div>
+            <div id ="output1"></div>
+</form> 
+    <!-- form end -->            
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
@@ -82,4 +103,72 @@
 </div>
 
 
+<script src="/axios/dist/axios.min.js"></script>
+<script>
+
+        function makeSelect1(itype1)
+        {
+          var ivalue1 = itype1.value;  
+          var output1 = document.getElementById('output');
+            if (ivalue1 == "Update")
+            {
+                alert("Update ID no : " + itype1.id);
+               axios.get('{{route('adminLTE')}}',{                
+                 params:{                
+                   id: itype1.id
+                 }
+                 }).then(function(res) {
+
+                    output1.className = 'container';
+                    output1.innerHTML = res.data;
+                    
+                })
+                .catch(function(err) {
+                  output1.className = 'container';
+                    output1.innerHTML = err.data;
+
+                });
+            }
+            if (ivalue1 == "Active")
+            {
+                alert("Active ID no : " + itype1.id  );
+                axios.post('{{route('sub_active')}}',
+                {id : itype1.id}).then(function(res) {
+                    //output.className = 'container';
+                    //output.innerHTML = res.data;
+
+                });
+            }
+
+            if (ivalue1 =="Suspend")
+            {
+             //   alert("Suspend ID no : " + itype.id  );
+                axios.post('{{route('sub_suspend')}}',
+                {id : itype1.id}).then(function(res) {
+                    //output.className = 'container';
+                    //output.innerHTML = res.data;
+
+                });
+
+            }
+            if (itype1.value == "Withdraw")
+            {
+            //    alert("Withdraw ID no : " + itype.id );
+                axios.post('{{route('sub_delete')}}',
+                {id : itype1.id}).then(function(res) {
+                    //output.className = 'container';
+                    //output.innerHTML = res.data;
+
+                });
+
+            }
+
+        }     
+
+
+
+</script>
+
+
 @endsection
+

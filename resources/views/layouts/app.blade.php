@@ -138,7 +138,7 @@
                         
                                 <ul class="nav navbar-nav">
                                     <li class="active"><a href="{{ url('/home') }}">Home</a></li>
-                                    <li><a href="{{route('sub_sum')}}">Subscription prcess</a></li>
+                                    <li><a href="{{route('sub_sum1')}}">Subscription prcess</a></li>
                                     <li><a href="{{route('euser')}}">Users</a></li>
                                     <li class="dropdown">
                                          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Product Features process

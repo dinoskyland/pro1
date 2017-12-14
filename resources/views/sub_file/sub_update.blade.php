@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.sub_update')
 
 @section('content')
 <style>
@@ -27,7 +27,7 @@
 <div class="container">
 
     <!-- form begin -->
-    <form action="{{ action('userController@sub_sum_post') }}" method="post">
+    <form action="{{ action('userController@sub_update_post') }}" method="post">
 
 
             <ul id="myTab" class="nav nav-tabs" role="tablist"> 
@@ -59,15 +59,18 @@
 
 
 
-
+            @foreach($subdesig as $subdeg)
 
                                 <div class="row">           
                                 <div class="col-sm-4">
                                 {!! csrf_field() !!}
     
                                     <div class="form-group">
+                                        <label for="isub_id">Subscription ID</label>
+                                        <input type="text" class="form-control" id="isub_id" name="isub_id" placeholder="Subscription ID" value="{{ $subdeg->subscription_view_id }}">                                                                      
+                                    
                                         <label for="ieuser_id">User ID</label>
-                                        <input type="text" class="form-control" id="ieuser_id" name="ieuser_id" placeholder="User ID" value="{{ old('ieuser_id') }}">
+                                        <input type="text" class="form-control" id="ieuser_id" name="ieuser_id" placeholder="User ID" value="{{ $subdeg->user_id }}">
                                     </div>
                                 </div>
                         
@@ -82,7 +85,11 @@
                                         -->
                                         <select name = "ipay_type">
                                             @foreach($pays as $pay)  
-                                            <option value= "{{ $pay->payment_type_id }}" >{{ $pay->p_kind }} </option>
+
+                                            <option value= "{{ $pay->payment_type_id }}" 
+                                            @if ($pay->payment_type_id == $subdeg->payment_id) selected= "selected"
+                                            @endif>{{ $pay->p_kind }} </option>
+
                                             @endforeach
                                         </select>                                                                                                                                
                                     
@@ -91,9 +98,13 @@
                                         <input type="text" class="form-control" id="ipay_time" name="ipay_time" placeholder="Payment cycle" value="{{ old('ipay_time') }}">                         
                                         -->
                                         <select name = "ipay_time">
+                                            
                                             @foreach($times as $time_s)  
-                                            <option value= "{{ $time_s->time_unit_id }}" >{{ $time_s->kind }} </option>
+                                            <option value= "{{ $time_s->time_unit_id }}" 
+                                            @if ($time_s->time_unit_id == $subdeg->time_unit_id) selected= "selected"
+                                            @endif>{{ $time_s->kind }} </option>
                                             @endforeach
+
                                         </select>                                   
                                     
                                         <label for="irate_plan">Rate Plan</label>
@@ -101,8 +112,11 @@
                                         <input type="text" class="form-control" id="irate_plan" name="irate_plan" placeholder="Rate Plan" value="{{ old('irate_plan') }}">
                                         -->
                                         <select name = "irate_plan">
+
                                             @foreach($rates as $rate)  
-                                            <option value= "{{ $rate->rate_plan_id }}" >{{ $rate->rate_plan_name }} </option>
+                                            <option value= "{{ $rate->rate_plan_id }}" 
+                                            @if ($rate->rate_plan_id == $subdeg->rate_plan_id)
+                                            selected= "selected" @endif> {{ $rate->rate_plan_name }} </option>
                                             @endforeach
                                         </select>                                             
                                                                                                                                                                                                     
@@ -111,9 +125,15 @@
                                         <input type="text" class="form-control" id="istatus" name="istatus" placeholder="Active" value="{{ old('istatus') }}">
                                         -->
                                         <select name = "istatus">
-                                            <option value= "Active" >Active </option>
-                                            <option value= "Trial" >Trial </option>
-                                            <option value= "Suspend" >Suspend</option>
+                                            <option value= "Active"
+                                            @if ($subdeg->status == "Active")
+                                            selected= "selected" @endif>Active </option>
+                                            <option value= "Trial" 
+                                            @if ($subdeg->status == "Trial")
+                                            selected= "selected" @endif>Trial </option>
+                                            <option value= "Suspend" 
+                                            @if ($subdeg->status == "Suspend")
+                                            selected= "selected" @endif>Suspend</option>
                                         </select>      
                                 </div>
                             </div>
@@ -128,7 +148,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="idescription">Description</label>
-                                                    <textarea class="form-control" id="idescription" name="idescription" placeholder="Description">{{ old('idescription') }}</textarea>
+                                                    <textarea class="form-control" id="idescription" name="idescription" placeholder="Description">{{ $subdeg->description }}</textarea>
                                                 </div>
                                                 <!--
                                                 <div class="form-group">
@@ -137,16 +157,18 @@
                                                 </div>  -->
                                                 
                                                 
-                                                <button type="submit" id= "ibtn1" class="btn btn-success">Add Subscription</button>
+                                                <button type="submit" id= "ibtn1" class="btn btn-success">Update Subscription</button>
                                 </div>                          
                                 
                 
                             </div> <!-- row end -->
     
 
+                            
 
 
 
+            @endforeach  
 
 
 
@@ -186,7 +208,8 @@
                                             <td> {{ $sub->billing_date }} </td>
                                             <td> {{ $sub->status }} </td>
                                             <td> 
-                                                <select name = "isub" id= "{{ $sub->subscription_view_id }}" onChange="makeSelect(this)">
+                                                <select name = "isub" id= "{{ $sub->subscription_view_id }}" onChange="makeSelect2(this)">
+                                                    <option value= "None">Select Action</option>
                                                     <option value= "Update">Update</option>
                                                     <option value= "Active" >Active </option>
                                                     <option value= "Suspend" >Suspend </option>
@@ -282,6 +305,7 @@
                                         <th>User ID</th>
                                         <th>Activation date</th>
                                         <th>Billing date</th>
+                                        <th>Updated date</th>
                                         <th>Status</th>
                                 </tr>
                                     </thead>
@@ -294,6 +318,7 @@
                                             <td> {{ $subs_log->user_id }} </td>
                                             <td> {{ $subs_log->activated_at }} </td>
                                             <td> {{ $subs_log->billing_date }} </td>
+                                            <td> {{ $subs_log->updated_at }} </td>
                                             <td> {{ $subs_log->status }} </td>
                                     </tr>           
                                         @endforeach  
@@ -307,6 +332,7 @@
                                         <th>User ID</th>
                                         <th>Activation date</th>
                                         <th>Billing date</th>
+                                        <th>Updated date</th>
                                         <th>Status</th>
                                     </tr>
                                     </tfoot>
@@ -332,11 +358,11 @@
 <script src="/axios/dist/axios.min.js"></script>
 <script>
 
-        function makeSelect(itype)
+        function makeSelect2(itype2)
         {
-          var ivalue = itype.value;  
-          var output = document.getElementById('output');
-            if (ivalue == "Update")
+          var ivalue2 = itype2.value;  
+          var output2 = document.getElementById('output');
+            if (ivalue2 == "Update")
             {
                 alert("Update ID no : " + itype.id);
 
@@ -350,33 +376,33 @@
                 .catch(function(err) {
                 });*/
             }
-            if (ivalue == "Active")
+            if (ivalue2 == "Active")
             {
-                alert("Active ID no : " + itype.id  );
+             //   alert("Active ID no : " + itype.id  );
                 axios.post('{{route('sub_active')}}',
-                {id : itype.id}).then(function(res) {
+                {id : itype2.id}).then(function(res) {
                     //output.className = 'container';
                     //output.innerHTML = res.data;
 
                 });
             }
 
-            if (ivalue =="Suspend")
+            if (ivalue2 =="Suspend")
             {
-                alert("Suspend ID no : " + itype.id  );
+             //   alert("Suspend ID no : " + itype.id  );
                 axios.post('{{route('sub_suspend')}}',
-                {id : itype.id}).then(function(res) {
+                {id : itype2.id}).then(function(res) {
                     //output.className = 'container';
                     //output.innerHTML = res.data;
 
                 });
 
             }
-            if (itype.value == "Withdraw")
+            if (itype2.value == "Withdraw")
             {
-                alert("Withdraw ID no : " + itype.id );
+            //    alert("Withdraw ID no : " + itype.id );
                 axios.post('{{route('sub_delete')}}',
-                {id : itype.id}).then(function(res) {
+                {id : itype2.id}).then(function(res) {
                     //output.className = 'container';
                     //output.innerHTML = res.data;
 
