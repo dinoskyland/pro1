@@ -23,26 +23,49 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
         <script  href="/static/bootstrap.js"></script>
-        Fonts 
-        
-        
 -->
         <title>Subscription Project</title>
 
-        <!-- Google Font 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        -->
+        <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
         <!-- Styles 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">  
-
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"   rel="stylesheet">
-
-        -->
-
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"   rel="stylesheet"> -->
         <link rel="stylesheet" href="../clismas/bootstrap/css/bootstrap.min.css">
         
+        <!--
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/AdminLTE.css"   >
+        -->
+        <!-- tables -->
         <link rel="stylesheet" href="../clismas/plugins/datatables/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="../clismas/dist/css/AdminLTE.min.css">
+
+        <link rel="stylesheet" href="../clismas/dist/css/skins/_all-skins.min.css">
+
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="../clismas/plugins/morris/morris.css">
+        <!-- jvectormap -->
+        <link rel="stylesheet" href="../clismas/plugins/jvectormap/jquery-jvectormap.css">
+        <!-- Date Picker -->
+        <link rel="stylesheet" href="../clismas/plugins/datepicker/bootstrap-datepicker.min.css">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="../clismas/plugins/daterangepicker/daterangepicker.css">
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link rel="stylesheet" href="../clismas/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+
+        <!-- Font Awesome 
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- Ionicons 
+        <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css"> -->
+
+        <!-- Google Font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+        
+        
         <!-- Styles -->
         <style>
 
@@ -106,27 +129,58 @@
 
     </head>
     <body>
-        
+        <div id="app">
             @yield('content')   
+        </div>
         
 
-        <!-- Scripts 
+          <!-- Scripts 
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/bootstrap.js') }}"></script> -->
-        
         <!--
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>     
-            -->
+        -->
+        <!--  
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>       
+        -->  
+        <!-- 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/js/adminlte.min.js"></script>  -->
 
-        <!-- jQuery 2.2.3 -->
-        <script src="../clismas/plugins/jQuery/jquery-2.2.3.min.js"></script>
-        <!-- Bootstrap 3.3.6 -->
-        <script src="../clismas/bootstrap/js/bootstrap.min.js"></script>
-        <!-- DataTables -->
-        <script src="../clismas/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="../clismas/plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script>
+
+            <!-- jQuery 2.2.3 -->
+            <script src="../clismas/plugins/jQuery/jquery-2.2.3.min.js"></script>
+            <!-- Bootstrap 3.3.6 -->
+            <script src="../clismas/bootstrap/js/bootstrap.min.js"></script>
+            <!-- DataTables -->
+            <script src="../clismas/plugins/datatables/jquery.dataTables.min.js"></script>
+            <script src="../clismas/plugins/datatables/dataTables.bootstrap.min.js"></script>
+            <!-- SlimScroll -->
+            <script src="../clismas/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+            <!-- FastClick -->
+            <script src="../clismas/plugins/fastclick/fastclick.js"></script>
+            <!-- AdminLTE App -->
+            <script src="../clismas/dist/js/app.min.js"></script>
+            <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+            <!-- Bootstrap WYSIHTML5 -->
+            <script src="../clismas/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+            
+            <script src="../clismas/distjs/pages/dashboard.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="../clismas/dist/js/demo.js"></script>
+            <!-- datepicker -->
+            <script src="../clismas/plugins/datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+            <!-- page script -->
+            <!-- jvectormap -->
+            <script src="../clismas/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+            <script src="../clismas/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+            <!-- Sparkline -->
+            <script src="../clismas/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+            <!-- jQuery Knob Chart -->
+            <script src="../clismas/plugins/knob/dist/jquery.knob.min.js"></script>
+            <script src="../clismas/plugins/daterangepicker/daterangepicker.js"></script>
+            <script src="../clismas/plugins/morris/morris.min.js"></script>
+            <script>
             $(function () {
                 $("#example1").DataTable({
                     "paging": true,
@@ -156,6 +210,14 @@
             });
             </script>        
 
+
+            <!-- Morris.js charts -->
+            <script src="bower_components/raphael/raphael.min.js"></script>
+            <!-- daterangepicker -->
+            <script src="bower_components/moment/min/moment.min.js"></script>
+            
+            <!-- AdminLTE App -->
+            <script src="dist/js/adminlte.min.js"></script>
              
         
     </body>

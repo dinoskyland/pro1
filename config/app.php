@@ -65,8 +65,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
-
+    //'timezone' => 'UTC',
+    'timezone' => 'Australia/Melbourne',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

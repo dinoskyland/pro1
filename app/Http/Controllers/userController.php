@@ -394,6 +394,7 @@ class userController extends Controller
         ->update([
             'status'=>'Suspend',
             'suspended_date'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
         ]); 
 
 
@@ -401,6 +402,7 @@ class userController extends Controller
         ->update([
             'status'=>'Suspend',
             'suspended_date'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
         ]); 
 
             /*

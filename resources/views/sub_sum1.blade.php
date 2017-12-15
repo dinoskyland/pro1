@@ -124,7 +124,7 @@
                                 <div class="col-sm-8">
                                                 <div class="form-group">
                                                     {!! Form::label('Activation Date') !!}
-                                                    {!! Form::date('iact_date', \Carbon\Carbon::now()) !!}
+                                                    {!! Form::datetime('iact_date', \Carbon\Carbon::now()->format('Y.m.d H:i:s')) !!}
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="idescription">Description</label>
@@ -246,32 +246,30 @@
 
                         <!-- Row start - subscription input -->
                         <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="sub_id">Subscription ID</label>
-                                        <input type="text" class="form-control" id="sub_id" name="sub_id" placeholder="Subscription ID" value="{{ old('sub_id') }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label for="euser_id">User ID</label>
-                                        <input type="text" class="form-control" id="euser_id" name="euser_id" placeholder="User ID" value="{{ old('euser_id') }}">
-                                    </div>
-                                </div>
-                                <div id= "pack" class="col-sm-4">
+                            <div class="col-sm-8">
+                                <div class="form-inline">
+                                    <label for="sub_id">Subscription ID</label>
+                                    <input type="text" class="form-control" id="sub_id" name="sub_id" placeholder="Subscription ID" value="{{ old('sub_id') }}">                                
+                            
+                            
+                                    <label for="euser_id">User ID</label>
+                                    <input type="text" class="form-control" id="euser_id" name="euser_id" placeholder="User ID" value="{{ old('euser_id') }}">
+                            
+                            
+                            
                                     <button type="submit" id= "sub_f" class="btn btn-success">Search Subscription logs</button>
                                 </div>
+                            </div>
                         </div>
                         <!-- Row end - subscription input -->
 
 
 
-
-
-
     </form> 
     <!-- form end -->
-                                
+
+
+
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
@@ -335,6 +333,22 @@
 </div>
 <script src="/axios/dist/axios.min.js"></script>
 <script>
+/*
+        var table = $("#example1").DataTable();
+        
+
+        $('#sub_ids').on('keyup',function(){
+            table .colums(1)
+                  .search(this.value)
+                  .draw();
+        });
+
+        $('#euser_ids').on('keyup',function(){
+            table .colums(2)
+                  .search(this.value)
+                  .draw();
+        });
+*/
 
         function makeSelect(itype)
         {
@@ -359,9 +373,27 @@
 
                    output.className = 'container';
                    output.innerHTML = res.data;
-               }).catch(function(err) {
-                 output.className = 'container';
-                   output.innerHTML = err.data;
+               }).then(()=>{
+                                $("#example1").DataTable({
+                                    "paging": true,
+                                    "lengthChange": false,
+                                    "searching": false,
+                                    "ordering": true,
+                                    "info": true,
+                                    "autoWidth": false
+                                });
+
+                                $('#example2').DataTable({
+                                "paging": true,
+                                "lengthChange": false,
+                                "searching": false,
+                                "ordering": true,
+                                "info": true,
+                                "autoWidth": false
+                                });
+                          }).catch(function(err) {
+                                output.className = 'container';
+                                output.innerHTML = err.data;
 
                });
            }
